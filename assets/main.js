@@ -33,7 +33,7 @@ fetch('./indices/index.json')
 
 
 // Fetch latest sectoral report
-fetch('./indices/index.json')
+fetch('./indices/sectoral_index.json')
   .then(response => response.json())
   .then(data => {
     const reportCard = document.getElementById('sectoral-report');
