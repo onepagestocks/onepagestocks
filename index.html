@@ -91,11 +91,13 @@
 
       // Latest report
       const latest = reports[0];
+      const dateMatch = latest.match(/(\d{4}-\d{2}-\d{2})/);
+      const date = dateMatch ? dateMatch[1] : '';
       const latestCard = document.createElement('div');
       latestCard.className = 'card';
       latestCard.innerHTML = `
         <p>Check out the latest HTML report with visual analysis and insights.</p>
-        <a href="./reports/${latest}">Latest Report →</a>
+        <a href="./reports/${latest}">Latest Report → ${date}</a>
       `;
       container.appendChild(latestCard);
 
