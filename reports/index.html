@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Reports</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f8f9fa;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 1rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    a {
+      color: #0d6efd;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Weekly Stock Reports</h1>
+  <p>Latest reports with visual insights.</p>
+  <ul id="report-list">Loading reports...</ul>
+  <p><a href="/">← Back to Home</a></p>
+
+  <script>
+    fetch('../indices/index.json')
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('report-list');
+        list.innerHTML = '';
+        data.forEach(filename => {
+          const li = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = filename;
+          link.textContent = filename.replace(/\.html$/, '').replace(/_/g, ' ');
+          li.appendChild(link);
+          list.appendChild(li);
+        });
+      })
+      .catch(err => {
+        document.getElementById('report-list').textContent = 'Failed to load reports.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
