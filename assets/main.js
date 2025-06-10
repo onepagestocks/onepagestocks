@@ -30,3 +30,25 @@ fetch('./indices/index.json')
     document.getElementById('reports-container').innerHTML = '<p>Error loading reports.</p>';
     console.error('Error fetching reports:', error);
   });
+
+
+// Fetch latest sectoral report
+fetch('./indices/index.json')
+  .then(response => response.json())
+  .then(data => {
+    const reportCard = document.getElementById('sectoral-report');
+    const latest = data.latest;
+    if (latest) {
+      const link = document.createElement('a');
+      link.href = `./sectoral/${latest}`;
+      link.textContent = 'View Latest Sectoral Report →';
+      reportCard.appendChild(link);
+    } else {
+      reportCard.innerHTML += '<p>No report found.</p>';
+    }
+  })
+  .catch(error => {
+    console.error('Error loading sectoral report:', error);
+  });
+
+
