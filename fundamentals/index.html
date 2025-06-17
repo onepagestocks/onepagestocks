@@ -36,7 +36,7 @@
   <p><a href="/">← Back to Home</a></p>
 
   <script>
-    fetch('../index.json')
+    fetch('../indices/stocks_index.json')
       .then(res => res.json())
       .then(data => {
         const list = document.getElementById('report-list');
