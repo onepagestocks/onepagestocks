@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trent Limited - Stock Analysis Infographic</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light grey background */
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 1rem; /* Rounded corners for the main container */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden; /* Ensures rounded corners are applied to content */
+        }
+        .section-header {
+            @apply text-2xl font-bold text-gray-800 mb-4 pb-2 border-b border-gray-200;
+        }
+        .data-point {
+            @apply flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0;
+        }
+        .data-label {
+            @apply text-gray-600 font-medium;
+        }
+        .data-value {
+            @apply text-gray-800 font-semibold;
+        }
+        .metric-card {
+            @apply bg-blue-50 text-blue-800 p-4 rounded-xl shadow-sm flex flex-col items-center justify-center text-center;
+        }
+        .metric-value {
+            @apply text-3xl font-bold mb-1;
+        }
+        .metric-label {
+            @apply text-sm text-blue-700;
+        }
+        .positive-growth {
+            @apply text-emerald-600;
+        }
+        .negative-growth {
+            @apply text-red-600;
+        }
+        /* Custom styling for SWOT */
+        .swot-item {
+            @apply p-4 rounded-xl shadow-md border;
+        }
+        .swot-strength {
+            @apply bg-green-50 border-green-200;
+        }
+        .swot-weakness {
+            @apply bg-red-50 border-red-200;
+        }
+        .swot-opportunity {
+            @apply bg-blue-50 border-blue-200;
+        }
+        .swot-threat {
+            @apply bg-yellow-50 border-yellow-200;
+        }
+    </style>
+</head>
+<body>
+    <div class="container p-8">
+        <!-- Header Section -->
+        <header class="text-center mb-8 pb-4 border-b border-gray-200">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-2">Trent Limited (TRENT:NSE)</h1>
+            <p class="text-2xl text-blue-600 font-bold">Current Price: ₹5,590.00 <span class="text-sm text-gray-500">(as of June 17, 2025)</span></p>
+            <p class="text-lg text-gray-600 mt-2">In-depth Stock Analysis for Investors</p>
+        </header>
+
+        <!-- Fundamental Analysis Section -->
+        <section class="mb-10">
+            <h2 class="section-header">📊 Fundamental Analysis</h2>
+            
+            <!-- Company Description & Products -->
+            <div class="mb-6 bg-gray-50 p-6 rounded-xl shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Company Description & Market Presence</h3>
+                <p class="text-gray-700 leading-relaxed mb-4">Trent Limited, a subsidiary of the Tata Group, is a prominent Indian retail company operating a diverse portfolio of retail concepts:</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><strong>Westside:</strong> Flagship fashion retail chain (apparel, footwear, home furnishings).</li>
+                    <li><strong>Zudio:</strong> Value fashion concept (attractive price points).</li>
+                    <li><strong>Star:</strong> Hypermarket/supermarket chain (staples, fresh produce, electronics).</li>
+                    <li><strong>Utsa:</strong> Modern Indian woman's lifestyle destination.</li>
+                    <li><strong>SAMOH:</strong> Elevated occasional wear concept.</li>
+                </ul>
+                <p class="text-gray-700 mt-4">Strong and expanding retail footprint across India with over <span class="font-semibold text-blue-600">1,000 fashion stores</span> (248 Westside, 757 Zudio as of April 2025). Operates both online and physical stores.</p>
+            </div>
+
+            <!-- Recent Quarterly/Annual Results -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Annual Results (FY24-25 vs FY23-24)</h3>
+                    <div class="data-point">
+                        <span class="data-label">Revenue (FY25 vs FY24)</span>
+                        <span class="data-value">₹17,135 Cr vs ₹12,375 Cr</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Growth (YoY)</span>
+                        <span class="data-value positive-growth">38.46%</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Net Profit (FY25 vs FY24)</span>
+                        <span class="data-value">₹1,534 Cr vs ₹1,477 Cr</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Growth (YoY)</span>
+                        <span class="data-value positive-growth">4.03%</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">EPS (FY25 vs FY24)</span>
+                        <span class="data-value">₹43.51 vs ₹41.82</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Growth (YoY)</span>
+                        <span class="data-value positive-growth">4.03%</span>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Q4 FY24-25 vs Q4 FY23-24 (YoY & QoQ)</h3>
+                    <div class="data-point">
+                        <span class="data-label">Revenue (Q4 FY25 vs Q4 FY24)</span>
+                        <span class="data-value">₹4,291.28 Cr vs ₹3,992.57 Cr</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">YoY Growth</span>
+                        <span class="data-value positive-growth">7.48%</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Net Profit (Q4 FY25 vs Q4 FY24)</span>
+                        <span class="data-value">₹318.15 Cr vs ₹704.23 Cr</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">YoY Decline</span>
+                        <span class="data-value negative-growth">-54.82%</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">Net Profit Margins (Q4 FY25 vs Q4 FY24)</span>
+                        <span class="data-value">7.41% vs 17.64%</span>
+                    </div>
+                    <div class="data-point">
+                        <span class="data-label">YoY Decline</span>
+                        <span class="data-value negative-growth">-57.97%</span>
+                    </div>
+                    <p class="text-gray-600 mt-4 text-sm">
+                        <strong>QoQ (Q4 FY25 vs Q3 FY25):</strong> Revenue Declined <span class="negative-growth">-9.4%</span>, Net Profits Declined <span class="negative-growth">-36.02%</span>, Net Profit Margins Declined <span class="negative-growth">-29.38%</span>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Profit Margins, Ratios, and CAGR -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Margins & Ratios</h3>
+                    <div class="data-point"><span class="data-label">Operating Margin (FY25)</span> <span class="data-value">16.15%</span></div>
+                    <div class="data-point"><span class="data-label">Gross Profit Margin (FY24)</span> <span class="data-value">10.80%</span></div>
+                    <div class="data-point"><span class="data-label">Net Profit Margin (FY25)</span> <span class="data-value">12.03%</span></div>
+                    <div class="data-point"><span class="data-label">Debt/Equity (FY25)</span> <span class="data-value">0.38 <span class="text-xs text-gray-500">(Low Debt)</span></span></div>
+                    <div class="data-point"><span class="data-label">Current Ratio (FY24)</span> <span class="data-value">1.19 <span class="text-xs text-gray-500">(Healthy Liquidity)</span></span></div>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm col-span-2">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">CAGR (Compounded Annual Growth Rate)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="metric-card">
+                            <span class="metric-value positive-growth">37.50%</span>
+                            <span class="metric-label">Revenue CAGR (5 years, FY20-FY25)</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value positive-growth">76%</span>
+                            <span class="metric-label">Revenue CAGR (3 years, FY22-FY25)</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value positive-growth">62.3%</span>
+                            <span class="metric-label">Profit CAGR (5 years, FY20-FY25)</span>
+                        </div>
+                        <div class="metric-card">
+                            <span class="metric-value positive-growth">237%</span>
+                            <span class="metric-label">Profit CAGR (3 years, FY22-FY25)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Valuation Ratios Section -->
+        <section class="mb-10">
+            <h2 class="section-header">📈 Valuation Ratios</h2>
+            <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                <p class="text-gray-700 mb-4">Trent's valuation ratios are significantly higher than the sector median, indicating a premium valuation:</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><strong>P/E Ratio (TTM as of Mar 2025):</strong> <span class="font-semibold">119.13</span> (Consolidated) - <span class="text-red-600">High</span></li>
+                    <li><strong>P/B Ratio (as of Mar 2025):</strong> <span class="font-semibold">36.98</span> (Consolidated) - <span class="text-red-600">High</span></li>
+                    <li><strong>EV/EBITDA (as of Mar 2025):</strong> <span class="font-semibold">72.5x</span> - <span class="text-red-600">Much higher than sector average of 11.1x</span></li>
+                </ul>
+                <p class="text-gray-700 mt-4 text-sm">This premium is likely due to consistent high growth rates, strong brand equity, and efficient business model (especially Zudio).</p>
+            </div>
+        </section>
+
+        <!-- Sectoral Context Section -->
+        <section class="mb-10">
+            <h2 class="section-header">🏭 Sectoral Context</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Sector Performance & Macro Trends</h3>
+                    <p class="text-gray-700 mb-2">Trent operates in the <span class="font-semibold">Consumer Discretionary</span> sector (retail).</p>
+                    <p class="text-gray-700 mb-4">While Nifty 50 is up ~5% YTD, the broader Indian market shows decent gains, driven by domestic retail investors and healthy macro outlook.</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-2">Recent Macro/Industry Trends:</h4>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1">
+                        <li>Favorable macroeconomic conditions (easing inflation, strong GDP).</li>
+                        <li>Rising disposable incomes & urbanization driving demand.</li>
+                        <li>Shift towards organized retail formats.</li>
+                        <li>Increasing e-commerce integration (omni-channel strategy).</li>
+                        <li>Intense competition from online and large retail chains.</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Key Competitors & Comparison</h3>
+                    <p class="text-gray-700 mb-2">Key competitors include:</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 mb-4">
+                        <li>Avenue Supermarts (DMart)</li>
+                        <li>Reliance Retail Ltd.</li>
+                        <li>Aditya Birla Fashion and Retail Ltd.</li>
+                        <li>Shoppers Stop Ltd.</li>
+                        <li>V2 Retail Ltd.</li>
+                        <li>Metro Brands Ltd.</li>
+                    </ul>
+                    <p class="text-gray-700 text-sm">Trent's high valuation ratios (P/E 119.13, P/B 36.98, EV/EBITDA 72.5x) are significantly higher than the sector median, indicating a premium valuation for its strong growth and market position.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest News Section -->
+        <section class="mb-10">
+            <h2 class="section-header">📰 Latest News</h2>
+            <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                <ul class="list-disc list-inside text-gray-700 space-y-3">
+                    <li><strong>Q4 FY25 Results:</strong> Revenue jumped 7.48% YoY, but net profit fell <span class="negative-growth">-54.82% YoY</span> to ₹318.15 Cr, and profit margins declined.</li>
+                    <li><strong>Retail Footprint Expansion (April 2025):</strong> Expanded to over <span class="font-semibold text-blue-600">1,000 fashion stores</span>.</li>
+                    <li><strong>Stake Sale (September 2024):</strong> Trent sold a 0.3% stake to international investor Siddhartha Yog for INR 718 crore.</li>
+                    <li><strong>Board Approval (February 2025):</strong> Secured approval to sell 29% stake in Grupo Massimo Dutti, S.A.</li>
+                    <li><strong>Bulk Deals:</strong> Recent bulk deals (November 2024) show Siddhartha Yog purchasing shares and Dodona Holdings Limited selling shares.</li>
+                    <li><strong>FII/DII Activity:</strong> FIIs recorded net outflows while DIIs reported net inflows in the broader market. Institutional holdings in Trent include SBI Life Insurance, Vanguard Group, and Motilal Oswal.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section class="mb-10">
+            <h2 class="section-header">✅ Conclusion</h2>
+            
+            <!-- SWOT Summary -->
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">SWOT Summary</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="swot-item swot-strength">
+                    <h4 class="font-bold text-lg text-green-700 mb-2">💪 Strengths</h4>
+                    <ul class="list-disc list-inside text-green-800 text-sm space-y-1">
+                        <li>Strong brand portfolio (Westside, Zudio, Star)</li>
+                        <li>Robust revenue & profit CAGR (3 & 5 years)</li>
+                        <li>Efficient operating model (Zudio)</li>
+                        <li>Part of reputable Tata Group</li>
+                        <li>Expanding retail footprint</li>
+                    </ul>
+                </div>
+                <div class="swot-item swot-weakness">
+                    <h4 class="font-bold text-lg text-red-700 mb-2">📉 Weaknesses</h4>
+                    <ul class="list-disc list-inside text-red-800 text-sm space-y-1">
+                        <li>High valuation ratios (P/E, P/B, EV/EBITDA)</li>
+                        <li>Recent Q4 FY25 net profit decline & margin contraction</li>
+                    </ul>
+                </div>
+                <div class="swot-item swot-opportunity">
+                    <h4 class="font-bold text-lg text-blue-700 mb-2">🚀 Opportunities</h4>
+                    <ul class="list-disc list-inside text-blue-800 text-sm space-y-1">
+                        <li>Growing Indian retail market</li>
+                        <li>Expansion into Tier 2/3 cities</li>
+                        <li>Strengthening e-commerce/omni-channel</li>
+                        <li>Potential for new brands/acquisitions</li>
+                    </ul>
+                </div>
+                <div class="swot-item swot-threat">
+                    <h4 class="font-bold text-lg text-yellow-700 mb-2">🚧 Threats</h4>
+                    <ul class="list-disc list-inside text-yellow-800 text-sm space-y-1">
+                        <li>Intense competition (organized/unorganized retail, e-commerce)</li>
+                        <li>Economic slowdown impacting spending</li>
+                        <li>Rapidly changing fashion trends</li>
+                        <li>Supply chain disruptions/rising costs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Recommendation -->
+            <div class="bg-blue-50 p-6 rounded-xl shadow-sm mb-6">
+                <h3 class="text-xl font-semibold text-blue-800 mb-3">Recommendation (Medium-to-Long Term)</h3>
+                <p class="text-blue-900 leading-relaxed">
+                    <strong>Hold with a positive long-term outlook.</strong> Trent has shown exceptional growth and has a strong market position. While current valuations are stretched and Q4 profit declined (possibly a one-off), its long-term prospects in the growing Indian retail sector are strong. Existing investors should continue to hold. New investors might consider entering on dips or accumulating gradually, mindful of the high current valuation.
+                </p>
+            </div>
+
+            <!-- Price Targets -->
+            <div class="bg-gray-50 p-6 rounded-xl shadow-sm">
+                <h3 class="text-xl font-semibold text-gray-800 mb-3">Price Range Targets & Key Levels</h3>
+                <p class="text-gray-700 mb-3">Given the current price of ₹5,590, short-term volatility is possible due to premium valuation.</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><strong>Support Levels:</strong> ₹5,400 - ₹5,500 and then ₹5,200.</li>
+                    <li><strong>Resistance Levels:</strong> Immediate around ₹5,800 - ₹5,900, further at ₹6,200 - ₹6,500.</li>
+                    <li><strong>Long-term Target (12-18 months):</strong> Potentially <span class="font-bold text-blue-600">₹6,500 - ₹7,000+</span>, assuming continued strong performance and favorable market conditions. Investors should be mindful of the high valuation.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Placeholder for Audio Overview -->
+        <!-- If you wish to integrate an audio overview later, you can add JavaScript here to generate and play it. -->
+        <!-- <div class="mt-8 text-center">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Generate Audio Overview
+            </button>
+        </div> -->
+
+    </div>
+</body>
+</html>
