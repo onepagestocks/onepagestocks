@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refex Industries Ltd. | Investment Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #1a202c;
+            --card-color: #2d3748;
+            --text-color: #e2e8f0;
+            --header-color: #ffffff;
+            --accent-color: #4fd1c5;
+            --positive-color: #48bb78;
+            --neutral-color: #f6e05e;
+            --strong-positive-color: #81e6d9;
+            --strong-buy-bg: #2b6cb0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .infographic-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--header-color);
+            margin: 0;
+        }
+
+        .header .sub-header {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-top: 0.5rem;
+        }
+        
+        .header .company-metrics {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+        
+        .company-metrics span {
+            background-color: var(--card-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .thesis-section {
+            background-color: var(--card-color);
+            border-left: 5px solid var(--accent-color);
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            border-radius: 0 8px 8px 0;
+            text-align: center;
+        }
+
+        .thesis-section h2 {
+            margin-top: 0;
+            color: var(--header-color);
+            font-weight: 600;
+        }
+        
+        .thesis-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .filter-card {
+            background-color: var(--card-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .filter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-header .icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-right: 1rem;
+            width: 50px;
+            text-align: center;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--header-color);
+        }
+        
+        .card-content {
+            flex-grow: 1;
+        }
+        
+        .card-content ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+        
+        .card-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .card-verdict {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .verdict-positive { background-color: var(--positive-color); color: var(--bg-color); }
+        .verdict-neutral { background-color: var(--neutral-color); color: var(--bg-color); }
+        .verdict-strong-positive { background-color: var(--strong-positive-color); color: var(--bg-color); }
+        
+        .final-recommendation {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: var(--strong-buy-bg);
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .final-recommendation h2 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--header-color);
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .header h1 { font-size: 2rem; }
+            .company-metrics { flex-direction: column; gap: 0.5rem; }
+            .filter-grid { grid-template-columns: 1fr; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="infographic-container">
+        <header class="header">
+            <h1>Refex Industries Ltd.</h1>
+            <p class="sub-header">Investment Thesis & 7-Filter Analysis</p>
+            <div class="company-metrics">
+                <span>CMP: ₹452.15</span>
+                <span>Market Cap: ₹5,846 Cr</span>
+                <span>Date: June 22, 2025</span>
+            </div>
+        </header>
+        
+        <section class="thesis-section">
+            <h2>The Investment Thesis</h2>
+            <p>Refex is a gritty, execution-focused turnaround story. The market currently undervalues its transformation into a dominant industrial services player, powered by the high-margin, high-entry-barrier ash handling business.</p>
+        </section>
+
+        <main class="filter-grid">
+            <div class="filter-card">
+                <div class="card-header">
+                    <div class="icon"><i class="fa-solid fa-user-tie"></i></div>
+                    <h3>1. Promoter Confidence</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>High promoter holding at <strong>53.37%</strong>.</li>
+                        <li>Pledged shares reduced, showing deleveraging intent.</li>
+                        <li>Holdings consolidated under a single entity.</li>
+                    </ul>
+                </div>
+                <div class="card-verdict verdict-positive">POSITIVE</div>
+            </div>
+
+            <div class="filter-card">
+                <div class="card-header">
+                    <div class="icon"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <h3>2. Capital Allocation</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Backed out of ₹315 Cr EV acquisition, signaling prudence.</li>
+                        <li>Consistent dividend payer, showing cash flow confidence.</li>
+                        <li>Comfortable Debt-to-Equity ratio of <strong>0.25</strong>.</li>
+                    </ul>
+                </div>
+                <div class="card-verdict verdict-neutral">NEUTRAL</div>
+            </div>
+
+            <div class="filter-card">
+                <div class="card-header">
+                    <div class="icon"><i class="fa-solid fa-industry"></i></div>
+                    <h3>3. Business Quality</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Ash & Coal Handling is the new engine (<strong>&gt;95% of revenue</strong>).</li>
+                        <li>Sticky, recurring revenue from major power plants.</li>
+                        <li>EBITDA margins expanding, reaching <strong>~12.7%</strong>.</li>
+                    </ul>
+                </div>
+                <div class="card-verdict verdict-positive">POSITIVE</div>
+            </div>
+
+            <div class="filter-card">
+                <div class="card-header">
+                    <div class="icon"><i class="fa-solid fa-bullhorn"></i></div>
+                    <h3>4. Narrative & Execution</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Aggressive ramp-up of ash business showcases execution.</li>
+                        <li>Narrative shift from gas trader to industrial services powerhouse.</li>
+                        <li>Management focus on execution over market hype.</li>
+                    </ul>
+                </div>
+                <div class="card-verdict verdict-positive">POSITIVE</div>
+            </div>
+
+            <div class="filter-card">
+                <div class="card-header">
+                    <div class="icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+                    <h3>5. Smart Money Check</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Foreign Institutional Investors (FIIs) are increasing their stake.</li>
+                        <li>Mutual Funds have started adding tracking positions.</li>
+                        <li>Shows growing institutional conviction in the story.</li>
+                    </ul>
+                </div>
+                <div class="card-verdict verdict-positive">POSITIVE</div>
+            </div>
+            
+            <div class="filter-card">
+                <div class="card-header">
+                    <div class="icon"><i class="fa-solid fa-tags"></i></div>
+                    <h3>6. Valuation vs Potential</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>TTM P/E of ~37 appears reasonable given high growth.</li>
+                        <li>Recent quarterly profits suggest a major jump in annual earnings.</li>
+                        <li>Full potential of the business is likely not yet priced in.</li>
+                    </ul>
+                </div>
+                <div class="card-verdict verdict-neutral">NEUTRAL</div>
+            </div>
+
+            <div class="filter-card">
+                 <div class="card-header">
+                    <div class="icon"><i class="fa-solid fa-star"></i></div>
+                    <h3>7. The "X" Factor</h3>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>Masterstroke pivot to the unglamorous ash handling business.</li>
+                        <li>Niche dominance in a market with high entry barriers.</li>
+                        <li>Quietly building a powerhouse overlooked by many.</li>
+                    </ul>
+                </div>
+                <div class="card-verdict verdict-strong-positive">STRONG POSITIVE</div>
+            </div>
+        </main>
+        
+        <footer class="final-recommendation">
+            <h2>STRONG BUY</h2>
+        </footer>
+
+    </div>
+</body>
+</html>
