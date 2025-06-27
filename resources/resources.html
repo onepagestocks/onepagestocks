@@ -24,52 +24,6 @@
         .card:hover {
             transform: translateY(-5px); /* Lift card slightly on hover */
         }
-        /* Modal overlay styling */
-        .modal {
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top of other content */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scrolling if content overflows */
-            background-color: rgba(0,0,0,0.4); /* Dark semi-transparent background */
-            display: flex; /* Use flexbox for centering content */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
-        }
-        /* Modal content box styling */
-        .modal-content {
-            background-color: #ffffff;
-            margin: auto; /* Auto margins will help center in some cases, but flexbox is primary */
-            padding: 2rem;
-            border-radius: 0.75rem;
-            width: 90%; /* Responsive width */
-            max-width: 500px; /* Max width for desktop */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            animation: fadeIn 0.3s ease-out; /* Fade-in animation */
-            position: relative; /* For absolute positioning of close button */
-        }
-        /* Keyframe animation for modal fade-in */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* Close button for modal */
-        .close-button {
-            color: #aaa;
-            position: absolute;
-            top: 1rem;
-            right: 1.5rem;
-            font-size: 1.75rem;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-button:hover,
-        .close-button:focus {
-            color: #374151; /* gray-700 from Tailwind */
-            text-decoration: none;
-        }
         /* Logo styling for website cards */
         .logo {
             width: 48px; /* Tailwind's w-12 */
@@ -90,10 +44,10 @@
             <p class="text-lg opacity-90">An exhaustive list of helpful websites and their most useful features for stock and market analysis in India.</p>
         </header>
 
-        <!-- Search Bar and Add Website Button Section -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+        <!-- Search Bar Section (Add Website Button removed) -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 mb-8">
             <input type="text" id="searchBar" placeholder="Search websites or features..." class="w-full md:w-2/3 p-3 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 shadow-sm">
-            <button id="addWebsiteBtn" class="w-full md:w-1/3 bg-green-600 text-white py-3 px-6 rounded-xl hover:bg-green-700 transition duration-300 ease-in-out shadow-md font-semibold">Add New Website</button>
+            <!-- The 'Add New Website' button has been removed from here -->
         </div>
 
         <!-- Websites Display Section - Content will be dynamically loaded here -->
@@ -101,34 +55,7 @@
         </div>
     </div>
 
-    <!-- Add Website Modal (initially hidden) -->
-    <div id="addWebsiteModal" class="modal hidden">
-        <div class="modal-content">
-            <span class="close-button" id="closeModal">&times;</span>
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">Add New Website</h2>
-            <form id="addWebsiteForm" class="space-y-4">
-                <div>
-                    <label for="siteName" class="block text-gray-700 text-sm font-semibold mb-2">Website Name:</label>
-                    <input type="text" id="siteName" name="siteName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                </div>
-                <div>
-                    <label for="siteUrl" class="block text-gray-700 text-sm font-semibold mb-2">Website URL:</label>
-                    <input type="url" id="siteUrl" name="siteUrl" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="https://example.com" required>
-                </div>
-                <div>
-                    <label for="siteFeature" class="block text-gray-700 text-sm font-semibold mb-2">Most Useful Feature:</label>
-                    <textarea id="siteFeature" name="siteFeature" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required></textarea>
-                </div>
-                <div>
-                    <label for="siteCategory" class="block text-gray-700 text-sm font-semibold mb-2">Category:</label>
-                    <select id="siteCategory" name="siteCategory" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
-                        <!-- Options will be populated by JS -->
-                    </select>
-                </div>
-                <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-xl hover:bg-blue-700 transition duration-300 ease-in-out shadow-md font-semibold">Add Website</button>
-            </form>
-        </div>
-    </div>
+    <!-- The 'Add Website Modal' has been completely removed from here -->
 
     <script>
         // Data structure holding categories and their respective websites
@@ -142,7 +69,7 @@
                     { "name": "Simply Wall St", "url": "https://simplywall.st/", "feature": "Comprehensive Portfolio Analysis with visual 'Snowflake' Valuations" },
                     { "name": "Tickertape", "url": "https://www.tickertape.in/", "feature": "User-friendly Stock Screener with over 200 filters & integrated data" },
                     { "name": "Finology Ticker", "url": "https://ticker.finology.in/", "feature": "'Three-Way Assistance' (Analysis, Peer Comparison, Curated Bundles)" },
-                    { "name": "StockEdge", "url": "https://stockedge.com/", "feature": "'My Combo Scans' (Multi-criteria filtering)" }, // <-- FIX: Added missing comma here
+                    { "name": "StockEdge", "url": "https://stockedge.com/", "feature": "'My Combo Scans' (Multi-criteria filtering)" },
                     { "name": "Google Finance", "url": "https://www.google.com/finance/", "feature": "Latest news on individual stocks" }
                 ]
             },
@@ -262,8 +189,8 @@
                     const card = document.createElement('div');
                     card.className = 'card p-6 flex flex-col justify-between items-start'; // Flex column for content layout
                     card.innerHTML = `
-                        <img src="${logoUrl}" alt="${website.name} Logo" class="logo" 
-                             onerror="this.onerror=null; this.src='https://placehold.co/48x48/CCCCCC/000000?text=${website.name.substring(0,2).toUpperCase()}';">
+                        <img src="${logoUrl}" alt="${website.name} Logo" class="logo"
+                            onerror="this.onerror=null; this.src='https://placehold.co/48x48/CCCCCC/000000?text=${website.name.substring(0,2).toUpperCase()}';">
                         <div>
                             <h3 class="text-xl font-semibold text-blue-700 mb-2">${website.name}</h3>
                             <p class="text-gray-600 mb-4 text-sm">${website.feature}</p>
@@ -285,7 +212,7 @@
         function filterWebsites() {
             log("Filtering websites...");
             const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-            
+
             // Map over existing categories and filter websites within each
             const filteredData = websiteData.map(categoryGroup => {
                 const filteredWebsites = categoryGroup.websites.filter(website =>
@@ -301,106 +228,6 @@
 
         // Add event listener to the search bar for real-time filtering
         document.getElementById('searchBar').addEventListener('keyup', filterWebsites);
-
-        // Get references to modal elements
-        const addWebsiteModal = document.getElementById('addWebsiteModal');
-        const addWebsiteBtn = document.getElementById('addWebsiteBtn');
-        const closeModal = document.getElementById('closeModal');
-        const addWebsiteForm = document.getElementById('addWebsiteForm');
-        const siteCategorySelect = document.getElementById('siteCategory');
-
-        /**
-         * Populates the category dropdown in the "Add New Website" modal
-         * with unique categories from the existing website data.
-         */
-        function populateCategories() {
-            log("Populating categories in modal...");
-            // Clear existing options and add a default "Select a Category" option
-            siteCategorySelect.innerHTML = '<option value="" disabled selected>Select a Category</option>';
-            // Get unique categories using Set and map
-            const categories = [...new Set(websiteData.map(item => item.category))];
-            categories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category;
-                option.textContent = category;
-                siteCategorySelect.appendChild(option);
-            });
-            log("Categories populated.");
-        }
-
-        // Event listener to open the "Add New Website" modal
-        addWebsiteBtn.onclick = function() {
-            addWebsiteModal.classList.remove('hidden'); // Show modal
-            addWebsiteModal.classList.add('flex'); // Ensure flex display for centering
-            populateCategories(); // Populate category dropdown
-            log("Add Website modal opened.");
-        }
-
-        // Event listener to close the modal using the 'x' button
-        closeModal.onclick = function() {
-            addWebsiteModal.classList.add('hidden'); // Hide modal
-            addWebsiteModal.classList.remove('flex');
-            addWebsiteForm.reset(); // Clear form fields
-            log("Add Website modal closed.");
-        }
-
-        // Event listener to close the modal when clicking outside of it
-        window.onclick = function(event) {
-            if (event.target == addWebsiteModal) {
-                addWebsiteModal.classList.add('hidden');
-                addWebsiteModal.classList.remove('flex');
-                addWebsiteForm.reset();
-                log("Add Website modal closed by clicking outside.");
-            }
-        }
-
-        /**
-         * Handles the submission of the "Add New Website" form.
-         * Adds the new website to the websiteData array and re-renders the list.
-         */
-        addWebsiteForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission behavior
-            log("Add Website form submitted.");
-
-            // Get form input values
-            const name = document.getElementById('siteName').value.trim();
-            const url = document.getElementById('siteUrl').value.trim();
-            const feature = document.getElementById('siteFeature').value.trim();
-            const category = document.getElementById('siteCategory').value;
-
-            // Basic form validation
-            if (!name || !url || !feature || !category) {
-                log("Validation error: All fields are required.");
-                // In a real app, you might show a user-friendly error message here
-                return;
-            }
-
-            const newWebsite = { name, url, feature };
-
-            // Find the correct category and push the new website into it
-            let categoryFound = false;
-            for (let i = 0; i < websiteData.length; i++) {
-                if (websiteData[i].category === category) {
-                    websiteData[i].websites.push(newWebsite);
-                    categoryFound = true;
-                    break;
-                }
-            }
-
-            // Fallback: If for some reason the category doesn't exist (unlikely with select box)
-            if (!categoryFound) {
-                websiteData.push({
-                    category: category,
-                    websites: [newWebsite]
-                });
-            }
-
-            renderWebsites(websiteData); // Re-render the list with the new website
-            addWebsiteModal.classList.add('hidden'); // Hide the modal
-            addWebsiteModal.classList.remove('flex');
-            addWebsiteForm.reset(); // Clear form fields
-            log(`New website "${name}" added to category "${category}".`);
-        });
 
         // Initial rendering of websites when the page loads
         document.addEventListener('DOMContentLoaded', () => {
