@@ -4,52 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Market Analysis Websites</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS CDN for utility classes -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter for a clean, modern look -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Custom styles to enhance Tailwind's utility classes */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f0f4f8; /* Light background for the page */
         }
+        /* Card styling with custom shadow and hover effect */
         .card {
             background-color: #ffffff;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-            transition: transform 0.2s ease-in-out;
+            border-radius: 0.75rem; /* rounded-xl from Tailwind */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md from Tailwind */
+            transition: transform 0.2s ease-in-out; /* Smooth hover transition */
         }
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px); /* Lift card slightly on hover */
         }
+        /* Modal overlay styling */
         .modal {
-            display: none; /* Hidden by default */
             position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
+            z-index: 1000; /* Sit on top of other content */
             left: 0;
             top: 0;
             width: 100%; /* Full width */
             height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: auto; /* Enable scrolling if content overflows */
+            background-color: rgba(0,0,0,0.4); /* Dark semi-transparent background */
+            display: flex; /* Use flexbox for centering content */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
         }
+        /* Modal content box styling */
         .modal-content {
             background-color: #ffffff;
-            margin: auto;
+            margin: auto; /* Auto margins will help center in some cases, but flexbox is primary */
             padding: 2rem;
             border-radius: 0.75rem;
-            width: 90%;
-            max-width: 500px;
+            width: 90%; /* Responsive width */
+            max-width: 500px; /* Max width for desktop */
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            animation: fadeIn 0.3s ease-out;
-            position: relative;
+            animation: fadeIn 0.3s ease-out; /* Fade-in animation */
+            position: relative; /* For absolute positioning of close button */
         }
+        /* Keyframe animation for modal fade-in */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        /* Close button for modal */
         .close-button {
             color: #aaa;
             position: absolute;
@@ -61,42 +67,41 @@
         }
         .close-button:hover,
         .close-button:focus {
-            color: #374151; /* gray-700 */
+            color: #374151; /* gray-700 from Tailwind */
             text-decoration: none;
-            cursor: pointer;
         }
+        /* Logo styling for website cards */
         .logo {
             width: 48px; /* Tailwind's w-12 */
             height: 48px; /* Tailwind's h-12 */
-            object-fit: contain;
+            object-fit: contain; /* Ensure logo scales within its bounds */
             margin-bottom: 1rem; /* Tailwind's mb-4 */
             border-radius: 0.5rem; /* Tailwind's rounded-lg */
             background-color: #f7fafc; /* light background for logos */
-            padding: 0.25rem;
+            padding: 0.25rem; /* Small padding around the logo */
         }
     </style>
 </head>
 <body class="p-4 md:p-8">
     <div class="max-w-7xl mx-auto">
-        <!-- Header Section -->
+        <!-- Header Section: Title and Subtitle -->
         <header class="text-center mb-8 bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-xl shadow-lg">
             <h1 class="text-4xl font-bold mb-2">Stock Market Analysis Resources</h1>
             <p class="text-lg opacity-90">An exhaustive list of helpful websites and their most useful features for stock and market analysis in India.</p>
         </header>
 
-        <!-- Search and Add Website Section -->
+        <!-- Search Bar and Add Website Button Section -->
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
             <input type="text" id="searchBar" placeholder="Search websites or features..." class="w-full md:w-2/3 p-3 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 shadow-sm">
             <button id="addWebsiteBtn" class="w-full md:w-1/3 bg-green-600 text-white py-3 px-6 rounded-xl hover:bg-green-700 transition duration-300 ease-in-out shadow-md font-semibold">Add New Website</button>
         </div>
 
-        <!-- Websites Display Section -->
+        <!-- Websites Display Section - Content will be dynamically loaded here -->
         <div id="websiteList" class="space-y-10">
-            <!-- Content will be dynamically loaded here -->
         </div>
     </div>
 
-    <!-- Add Website Modal -->
+    <!-- Add Website Modal (initially hidden) -->
     <div id="addWebsiteModal" class="modal hidden">
         <div class="modal-content">
             <span class="close-button" id="closeModal">&times;</span>
@@ -126,7 +131,7 @@
     </div>
 
     <script>
-        // Array of website data
+        // Data structure holding categories and their respective websites
         let websiteData = [
             {
                 "category": "Comprehensive Stock Research & Fundamental Analysis Platforms",
@@ -137,7 +142,7 @@
                     { "name": "Simply Wall St", "url": "https://simplywall.st/", "feature": "Comprehensive Portfolio Analysis with visual 'Snowflake' Valuations" },
                     { "name": "Tickertape", "url": "https://www.tickertape.in/", "feature": "User-friendly Stock Screener with over 200 filters & integrated data" },
                     { "name": "Finology Ticker", "url": "https://ticker.finology.in/", "feature": "'Three-Way Assistance' (Analysis, Peer Comparison, Curated Bundles)" },
-                    { "name": "StockEdge", "url": "https://stockedge.com/", "feature": "'My Combo Scans' (Multi-criteria filtering)" }
+                    { "name": "StockEdge", "url": "https://stockedge.com/", "feature": "'My Combo Scans' (Multi-criteria filtering)" }, // <-- FIX: Added missing comma here
                     { "name": "Google Finance", "url": "https://www.google.com/finance/", "feature": "Latest news on individual stocks" }
                 ]
             },
@@ -198,96 +203,121 @@
             }
         ];
 
-        // Function to log messages
+        // Utility function for logging messages to the console (helpful for debugging)
         function log(message) {
             console.log(`[${new Date().toLocaleTimeString()}] ${message}`);
         }
 
-        // Function to get logo URL from website URL
+        /**
+         * Generates a logo URL for a given website URL using Clearbit.
+         * Provides a robust placeholder fallback if Clearbit fails or URL is invalid.
+         * @param {string} siteUrl - The URL of the website.
+         * @returns {string} The logo URL or a placeholder image URL.
+         */
         function getLogoUrl(siteUrl) {
             try {
+                // Attempt to parse the URL to get the hostname
                 const domain = new URL(siteUrl).hostname;
-                // Using Clearbit for dynamic logo fetching. It's a common, free-tier friendly service.
-                // You can specify size, e.g., ?size=128
+                // Use Clearbit's API to get the logo, specifying size
                 return `https://logo.clearbit.com/${domain}?size=48`;
             } catch (e) {
-                log(`Error parsing URL for logo: ${siteUrl}, Error: ${e}`);
-                return `https://placehold.co/48x48/CCCCCC/000000?text=${siteUrl.substring(siteUrl.indexOf('//') + 2, siteUrl.indexOf('/', siteUrl.indexOf('//') + 2)).substring(0, 2).toUpperCase()}`; // Fallback to placeholder with initials
+                log(`Error parsing URL for logo: ${siteUrl}. Error: ${e.message}`);
+                // Fallback to a placeholder image with 'LO' text if URL parsing fails
+                return `https://placehold.co/48x48/CCCCCC/000000?text=LO`;
             }
         }
 
-        // Function to render websites
+        /**
+         * Renders the list of websites on the page, grouped by category.
+         * Clears previous content before rendering.
+         * @param {Array} dataToRender - The array of website data (can be filtered).
+         */
         function renderWebsites(dataToRender) {
             log("Rendering websites...");
             const websiteListDiv = document.getElementById('websiteList');
-            websiteListDiv.innerHTML = ''; // Clear existing content
+            websiteListDiv.innerHTML = ''; // Clear existing content to avoid duplicates
 
+            // Display a message if no websites are found after filtering
             if (dataToRender.length === 0) {
                 websiteListDiv.innerHTML = '<p class="text-center text-gray-600 text-xl font-medium mt-10">No websites found matching your criteria.</p>';
-                log("No websites found to render.");
+                log("No websites found to render based on current filter.");
                 return;
             }
 
+            // Iterate through each category group
             dataToRender.forEach(categoryGroup => {
-                // Category heading
+                // Create and append the category heading
                 const categoryHeading = document.createElement('h2');
                 categoryHeading.className = 'text-3xl font-bold text-gray-800 mb-6 border-b-2 border-blue-400 pb-2';
                 categoryHeading.textContent = categoryGroup.category;
                 websiteListDiv.appendChild(categoryHeading);
 
-                // Grid for websites within category
+                // Create a grid container for websites within the current category
                 const gridDiv = document.createElement('div');
                 gridDiv.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8';
 
+                // Iterate through each website in the current category
                 categoryGroup.websites.forEach(website => {
-                    const logoUrl = getLogoUrl(website.url);
+                    const logoUrl = getLogoUrl(website.url); // Get the logo URL
                     const card = document.createElement('div');
-                    card.className = 'card p-6 flex flex-col justify-between items-start'; // Added items-start for logo alignment
+                    card.className = 'card p-6 flex flex-col justify-between items-start'; // Flex column for content layout
                     card.innerHTML = `
-                        <img src="${logoUrl}" alt="${website.name} Logo" class="logo" onerror="this.onerror=null; this.src='https://placehold.co/48x48/CCCCCC/000000?text=${website.name.substring(0,2).toUpperCase()}';">
+                        <img src="${logoUrl}" alt="${website.name} Logo" class="logo" 
+                             onerror="this.onerror=null; this.src='https://placehold.co/48x48/CCCCCC/000000?text=${website.name.substring(0,2).toUpperCase()}';">
                         <div>
                             <h3 class="text-xl font-semibold text-blue-700 mb-2">${website.name}</h3>
                             <p class="text-gray-600 mb-4 text-sm">${website.feature}</p>
                         </div>
                         <a href="${website.url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline text-sm font-medium mt-4 self-start">Visit Website &rarr;</a>
                     `;
-                    gridDiv.appendChild(card);
+                    gridDiv.appendChild(card); // Add the website card to the grid
                 });
-                websiteListDiv.appendChild(gridDiv);
+                websiteListDiv.appendChild(gridDiv); // Add the grid to the main list container
             });
             log("Websites rendered successfully.");
         }
 
-        // Function to filter websites based on search input
+        /**
+         * Filters the website data based on the search bar input.
+         * Case-insensitive search on website name and feature.
+         * Re-renders the websites with the filtered data.
+         */
         function filterWebsites() {
             log("Filtering websites...");
             const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            
+            // Map over existing categories and filter websites within each
             const filteredData = websiteData.map(categoryGroup => {
                 const filteredWebsites = categoryGroup.websites.filter(website =>
                     website.name.toLowerCase().includes(searchTerm) ||
                     website.feature.toLowerCase().includes(searchTerm)
                 );
-                return { ...categoryGroup, websites: filteredWebsites };
-            }).filter(categoryGroup => categoryGroup.websites.length > 0); // Only include categories with matching websites
+                return { ...categoryGroup, websites: filteredWebsites }; // Return category with filtered websites
+            }).filter(categoryGroup => categoryGroup.websites.length > 0); // Only keep categories that have matching websites
 
-            renderWebsites(filteredData);
+            renderWebsites(filteredData); // Render the filtered results
             log(`Filtered by: "${searchTerm}"`);
         }
 
-        // Add event listener for search bar
+        // Add event listener to the search bar for real-time filtering
         document.getElementById('searchBar').addEventListener('keyup', filterWebsites);
 
-        // Modal functionality
+        // Get references to modal elements
         const addWebsiteModal = document.getElementById('addWebsiteModal');
         const addWebsiteBtn = document.getElementById('addWebsiteBtn');
         const closeModal = document.getElementById('closeModal');
         const addWebsiteForm = document.getElementById('addWebsiteForm');
         const siteCategorySelect = document.getElementById('siteCategory');
 
-        // Populate categories in the modal select box
+        /**
+         * Populates the category dropdown in the "Add New Website" modal
+         * with unique categories from the existing website data.
+         */
         function populateCategories() {
             log("Populating categories in modal...");
-            siteCategorySelect.innerHTML = '<option value="">Select a Category</option>'; // Default option
+            // Clear existing options and add a default "Select a Category" option
+            siteCategorySelect.innerHTML = '<option value="" disabled selected>Select a Category</option>';
+            // Get unique categories using Set and map
             const categories = [...new Set(websiteData.map(item => item.category))];
             categories.forEach(category => {
                 const option = document.createElement('option');
@@ -298,20 +328,23 @@
             log("Categories populated.");
         }
 
+        // Event listener to open the "Add New Website" modal
         addWebsiteBtn.onclick = function() {
-            addWebsiteModal.classList.remove('hidden');
-            addWebsiteModal.classList.add('flex'); // Ensure it uses flexbox for centering
-            populateCategories();
+            addWebsiteModal.classList.remove('hidden'); // Show modal
+            addWebsiteModal.classList.add('flex'); // Ensure flex display for centering
+            populateCategories(); // Populate category dropdown
             log("Add Website modal opened.");
         }
 
+        // Event listener to close the modal using the 'x' button
         closeModal.onclick = function() {
-            addWebsiteModal.classList.add('hidden');
+            addWebsiteModal.classList.add('hidden'); // Hide modal
             addWebsiteModal.classList.remove('flex');
             addWebsiteForm.reset(); // Clear form fields
             log("Add Website modal closed.");
         }
 
+        // Event listener to close the modal when clicking outside of it
         window.onclick = function(event) {
             if (event.target == addWebsiteModal) {
                 addWebsiteModal.classList.add('hidden');
@@ -321,24 +354,30 @@
             }
         }
 
-        // Handle form submission for adding new website
+        /**
+         * Handles the submission of the "Add New Website" form.
+         * Adds the new website to the websiteData array and re-renders the list.
+         */
         addWebsiteForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevent default form submission behavior
             log("Add Website form submitted.");
 
+            // Get form input values
             const name = document.getElementById('siteName').value.trim();
             const url = document.getElementById('siteUrl').value.trim();
             const feature = document.getElementById('siteFeature').value.trim();
             const category = document.getElementById('siteCategory').value;
 
+            // Basic form validation
             if (!name || !url || !feature || !category) {
                 log("Validation error: All fields are required.");
+                // In a real app, you might show a user-friendly error message here
                 return;
             }
 
             const newWebsite = { name, url, feature };
 
-            // Find the category and add the new website
+            // Find the correct category and push the new website into it
             let categoryFound = false;
             for (let i = 0; i < websiteData.length; i++) {
                 if (websiteData[i].category === category) {
@@ -348,7 +387,7 @@
                 }
             }
 
-            // If category doesn't exist (shouldn't happen with select, but as a fallback)
+            // Fallback: If for some reason the category doesn't exist (unlikely with select box)
             if (!categoryFound) {
                 websiteData.push({
                     category: category,
@@ -357,13 +396,13 @@
             }
 
             renderWebsites(websiteData); // Re-render the list with the new website
-            addWebsiteModal.classList.add('hidden');
+            addWebsiteModal.classList.add('hidden'); // Hide the modal
             addWebsiteModal.classList.remove('flex');
-            addWebsiteForm.reset();
+            addWebsiteForm.reset(); // Clear form fields
             log(`New website "${name}" added to category "${category}".`);
         });
 
-        // Initial render on page load
+        // Initial rendering of websites when the page loads
         document.addEventListener('DOMContentLoaded', () => {
             renderWebsites(websiteData);
             log("Page loaded and initial websites rendered.");
