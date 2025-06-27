@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OnePageStocks – Investing made simple.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for gradients and subtle animations if needed, otherwise Tailwind handles most */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Dark background */
+            color: #e6edf3; /* Light text for contrast */
+        }
+        /* Gradient background for hero/header */
+        .hero-gradient {
+            background: linear-gradient(135deg, #1f2a37 0%, #0d1117 100%);
+        }
+        /* Card specific styles for subtle animation */
+        .card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        /* Custom link styling for header nav */
+        .header-link {
+            transition: color 0.2s ease-in-out;
+        }
+        .header-link:hover {
+            color: #6366f1; /* Tailwind indigo-500 for hover */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+    <!-- Header Section -->
+    <header class="hero-gradient text-white py-4 px-6 md:px-8 shadow-lg">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2 md:mb-0">OnePageStocks</h1>
+            <nav class="text-sm md:text-base flex flex-wrap justify-center gap-x-4 gap-y-2">
+                <a href="/resources/resources.html" class="header-link hover:text-indigo-400">Resources</a>
+                <span class="text-gray-400">|</span>
+                <a href="/resources/checklist.html" class="header-link hover:text-indigo-400">Stock Filtering Journey</a>
+                <span class="text-gray-400">|</span>
+                <a href="/ai_says/" class="header-link hover:text-indigo-400">AI Says</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-16 px-6 md:px-8 text-center text-white border-b border-gray-700">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+                Investing Made <span class="text-indigo-400">Simple</span>. Intelligence <span class="text-indigo-400">Unleashed</span>.
+            </h2>
+            <p class="text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                Unlock smarter financial decisions with data-driven insights, automated trading analysis, and strategic guidance tailored for the modern investor.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <!-- Example Call to Action Button - Adjust href as needed -->
+                <a href="#featured-projects" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    Explore Projects
+                </a>
+                <a href="#about-us" class="bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow container mx-auto px-6 py-12 md:py-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Featured Projects Section -->
+        <section class="lg:col-span-2 section bg-gray-800 p-8 rounded-lg shadow-xl" id="featured-projects">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-6">🗂️ Featured Projects</h2>
+            <div class="card bg-gray-700 p-6 rounded-lg shadow-md border border-gray-600 hover:shadow-lg">
+                <h3 class="text-xl font-semibold text-white mb-2">Sectoral Movement Report: See how buying/selling has moved in all the sectors.</h3>
+                <p class="text-gray-300">Helps you identify emerging markets and make better decisions backed by data.</p>
+                <!-- Add a button/link here if the report is accessible directly -->
+                <!-- <a href="#" class="inline-block mt-4 text-indigo-400 hover:text-indigo-300 font-medium">View Report →</a> -->
+            </div>
+        </section>
+
+        <!-- Weekly Reports Section -->
+        <section class="lg:col-span-1 section bg-gray-800 p-8 rounded-lg shadow-xl" id="weekly-reports">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-6">📊 Weekly Reports</h2>
+            <div id="reports-container" class="bg-gray-700 p-6 rounded-lg shadow-md border border-gray-600">
+                <p class="text-gray-300">Reports will appear here once loaded by `assets/main.js`.</p>
+                <!-- Placeholder for reports loaded by JS -->
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section class="lg:col-span-2 section bg-gray-800 p-8 rounded-lg shadow-xl" id="about-us">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-6">👋 About Us</h2>
+            <div class="card bg-gray-700 p-6 rounded-lg shadow-md border border-gray-600 hover:shadow-lg">
+                <p class="text-gray-300 mb-4">We are data scientists, ML engineers, and self-investors/traders with 10+ years of experience across pharma, retail, media, and fintech. We build data-driven products, write algorithms, and explore the edge where data meets real-world decisions. We believe in self-analysis of markets when it to investing.</p>
+                <a href="/assets/about.html" class="text-indigo-400 hover:text-indigo-300 font-medium flex items-center">
+                    More about us
+                    <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Disclaimer Section -->
+        <section class="lg:col-span-1 section bg-gray-800 p-8 rounded-lg shadow-xl">
+            <h2 class="text-3xl font-bold text-indigo-400 mb-6">⚠️ Disclaimer</h2>
+            <div class="card bg-gray-700 p-6 rounded-lg shadow-md border border-gray-600 hover:shadow-lg">
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    The information provided on this website is for educational and informational purposes only. It does not constitute financial, investment, or trading advice. You are solely responsible for your financial decisions. Please consult a licensed financial advisor before making any investment decisions. We run automated scans and try to reject as much as possible for our personal investment purposes. The reports provided by no means is any stock tip or any kind of portfolio management services. Rather this can be thought of as habit inculcation to see some stocks on weekly basis and be vigilant of market, stocks, news, results etc and be vigilant of our personal investments. We want to inculcate self-learning behavior and understanding of the markets and the provided reports serve as base material for such a cohort for group analysis where everyone is welcome.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-900 text-gray-500 py-6 px-6 md:px-8 text-center mt-auto border-t border-gray-700">
+        <div class="container mx-auto">
+            &copy; 2025 ONEPAGESTOCKS · Built with ❤️ on GitHub Pages
+        </div>
+    </footer>
+
+    <!-- Your existing main.js script -->
+    <script src="assets/main.js"></script>
+</body>
+</html>
