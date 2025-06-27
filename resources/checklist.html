@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stock Filtering Journey</title>
+    <!-- Poppins font for modern typography -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Define CSS variables for consistent theming */
+        /* Define CSS variables for consistent theming and easy modification */
         :root {
-            --primary-color: #4a90e2;
-            --secondary-color: #f4f7fa;
-            --text-color: #333;
-            --line-color: #dbe2ef;
-            --shadow-color: rgba(0, 0, 0, 0.1);
+            --primary-color: #4a90e2; /* Blue tone for accents */
+            --secondary-color: #f4f7fa; /* Light background for the page */
+            --text-color: #333; /* Dark gray for main text */
+            --line-color: #dbe2ef; /* Light gray for timeline line */
+            --shadow-color: rgba(0, 0, 0, 0.1); /* Subtle shadow color */
         }
 
-        /* Basic body styling for font, background, and spacing */
+        /* Basic body styling: font, background, text color, line height, padding */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--secondary-color);
@@ -23,16 +24,16 @@
             line-height: 1.6;
             margin: 0;
             padding: 40px 20px;
-            display: flex;
+            display: flex; /* Use flexbox to center content vertically */
             flex-direction: column;
-            align-items: center;
+            align-items: center; /* Center horizontally */
             min-height: 100vh; /* Ensure body takes full viewport height */
         }
 
-        /* Container for content, centered and max-width */
+        /* Container for the main content, centered with max-width */
         .container {
             max-width: 900px;
-            width: 100%;
+            width: 100%; /* Occupy full width within max-width */
             margin: 0 auto;
             text-align: center;
         }
@@ -49,113 +50,75 @@
         p.subtitle {
             font-size: 1.1rem;
             color: #666;
-            margin-bottom: 50px;
+            margin-bottom: 50px; /* Space below the subtitle */
         }
 
-        /* Button container for spacing and layout */
-        .button-container {
-            margin-top: 30px;
-            margin-bottom: 30px; /* Added margin to separate from timeline */
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        /* Styling for action buttons */
-        .action-button {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.2);
-        }
-
-        .action-button:hover {
-            background-color: #3a7bd5;
-            transform: translateY(-2px);
-        }
-
-        .action-button:active {
-            background-color: #2e6bb8;
-            transform: translateY(0);
-        }
-
-        .action-button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-
-        /* Timeline container with relative positioning for the central line */
+        /* Timeline container: position relative for the central line */
         .timeline {
             position: relative;
             width: 100%;
-            max-width: 800px; /* Limit timeline width for better readability */
+            max-width: 800px; /* Limit timeline width for better readability on large screens */
             margin: 0 auto;
-            padding: 0 15px; /* Padding for mobile view to prevent content touching edges */
+            padding: 0 15px; /* Horizontal padding for mobile view to prevent content touching edges */
         }
 
         /* The central vertical line of the timeline */
         .timeline::before {
             content: '';
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            left: 50%; /* Center the line horizontally */
+            transform: translateX(-50%); /* Adjust to true center */
             top: 0;
             bottom: 0;
             width: 4px;
             background: var(--line-color);
             border-radius: 2px;
-            z-index: 0; /* Ensure line is behind content boxes */
+            z-index: 0; /* Ensure the line is behind the content boxes */
         }
 
-        /* Individual timeline item container */
+        /* Individual timeline item container: uses flexbox for left/right alignment */
         .timeline-item {
             display: flex;
-            justify-content: flex-end; /* Default to right side for even items (flex-end) */
+            justify-content: flex-end; /* Default for even items (right side) */
             position: relative;
-            margin-bottom: 60px; /* Space between items */
+            margin-bottom: 60px; /* Space between each timeline item */
             width: 100%; /* Take full width of parent timeline container */
         }
 
-        /* Styles for odd-indexed timeline items (left side) */
+        /* Styles for odd-indexed timeline items (e.g., 1st, 3rd, 5th steps) */
         .timeline-item:nth-child(odd) {
-            justify-content: flex-start; /* Move to left side */
+            justify-content: flex-start; /* Aligns content to the left side */
         }
         
-        /* Content box styling */
+        /* Content box styling: the main card for each step */
         .timeline-content {
             background-color: #fff;
             border-radius: 12px;
             padding: 25px;
             box-shadow: 0 4px 15px var(--shadow-color);
-            width: calc(50% - 60px); /* Half width minus margin/dot space */
+            /* Calculate width: half of parent minus space for dot/margin */
+            width: calc(50% - 60px); 
             text-align: left;
-            position: relative;
-            border-top: 4px solid var(--primary-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            z-index: 1; /* Ensure content box is above the line */
+            position: relative; /* For absolute positioning of the arrow */
+            border-top: 4px solid var(--primary-color); /* Top border accent */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation for hover */
+            z-index: 1; /* Ensure content box is above the central line */
         }
         
         /* Hover effect for content boxes */
         .timeline-item:hover .timeline-content {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2);
+            transform: translateY(-5px); /* Lift slightly */
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2); /* Enhance shadow */
         }
 
-        /* Specific margins for left/right content boxes */
+        /* Specific margins for left-aligned content boxes (odd items) */
         .timeline-item:nth-child(odd) .timeline-content {
-            margin-right: 40px; /* Space from the central line */
+            margin-right: 40px; /* Space between content and central line */
         }
 
+        /* Specific margins for right-aligned content boxes (even items) */
         .timeline-item:nth-child(even) .timeline-content {
-            margin-left: 40px; /* Space from the central line */
+            margin-left: 40px; /* Space between content and central line */
         }
         
         /* Heading within content box */
@@ -173,109 +136,97 @@
             color: #555;
         }
 
-        /* Styling for the timeline dot */
+        /* Styling for the timeline dot: marks the position on the central line */
         .timeline-dot {
             position: absolute;
-            top: 20px; /* Align with content box top padding */
+            top: 20px; /* Vertically align with the top of content box padding */
             width: 20px;
             height: 20px;
             background-color: #fff;
             border: 4px solid var(--primary-color);
-            border-radius: 50%;
+            border-radius: 50%; /* Make it a circle */
             z-index: 2; /* Ensure dot is on top of everything */
-            transform: translateX(-50%); /* Centering the dot on its reference point */
+            transform: translateX(-50%); /* Fine-tune centering on the line */
         }
 
-        /* Positioning the dot for even (right) items */
-        .timeline-item:nth-child(even) .timeline-dot {
-            left: 50%; /* Position at the center line */
+        /* Positioning the dot for both even and odd items (always on the central line) */
+        .timeline-item .timeline-dot {
+            left: 50%; /* Aligns the dot with the central timeline line */
         }
         
-        /* Positioning the dot for odd (left) items */
-        .timeline-item:nth-child(odd) .timeline-dot {
-            left: 50%; /* Position at the center line */
-        }
-
-        /* Styling for the arrow connecting content to the line */
+        /* Styling for the arrow that connects content to the line */
         .timeline-content::before {
             content: '';
             position: absolute;
-            top: 20px;
+            top: 20px; /* Vertically align with content box padding */
             width: 0;
             height: 0;
-            border-style: solid;
+            border-style: solid; /* Required for triangle shape */
             z-index: 1; /* Arrow should be above content box background */
         }
         
-        /* Arrow for odd (left) items pointing towards the center line */
+        /* Arrow for odd (left) items: points right towards the central line */
         .timeline-item:nth-child(odd) .timeline-content::before {
             right: -15px; /* Position outside the content box */
-            border-width: 10px 0 10px 15px; /* Create a right-pointing arrow */
-            border-color: transparent transparent transparent #fff; /* Match content background */
+            border-width: 10px 0 10px 15px; /* Create a right-pointing triangle */
+            border-color: transparent transparent transparent #fff; /* Match content background color */
         }
         
-        /* Arrow for even (right) items pointing towards the center line */
+        /* Arrow for even (right) items: points left towards the central line */
         .timeline-item:nth-child(even) .timeline-content::before {
             left: -15px; /* Position outside the content box */
-            border-width: 10px 15px 10px 0; /* Create a left-pointing arrow */
-            border-color: transparent #fff transparent transparent; /* Match content background */
+            border-width: 10px 15px 10px 0; /* Create a left-pointing triangle */
+            border-color: transparent #fff transparent transparent; /* Match content background color */
         }
 
-        /* Responsive Design for smaller screens */
+        /* Responsive Design for smaller screens (max-width: 768px) */
         @media (max-width: 768px) {
             body {
                 padding: 20px 10px; /* Reduce overall padding on smaller screens */
             }
 
             h1 {
-                font-size: 2rem;
+                font-size: 2rem; /* Smaller heading on mobile */
             }
 
             p.subtitle {
-                font-size: 1rem;
+                font-size: 1rem; /* Smaller subtitle on mobile */
                 margin-bottom: 30px;
             }
 
             /* Adjust central line position for mobile (left alignment) */
             .timeline::before {
-                left: 20px;
+                left: 20px; /* Move line to the left side */
                 transform: translateX(0); /* Remove center transform */
             }
 
             /* All timeline items align to the left on mobile */
             .timeline-item {
-                justify-content: flex-start;
+                justify-content: flex-start; /* Force all items to align left */
                 padding-left: 50px; /* Space for the line and dot */
                 margin-bottom: 40px; /* Reduce margin between items */
             }
 
-            /* Content box takes full width within its padded container */
+            /* Content box takes full width within its padded container on mobile */
             .timeline-content {
-                width: 100%;
+                width: 100%; /* Full width */
                 margin-left: 0; /* Remove specific left/right margins */
                 margin-right: 0;
             }
 
             /* All dots align to the left line on mobile */
             .timeline-dot {
-                left: 20px;
-                right: auto; /* Ensure no right positioning */
-                transform: translateX(-50%); /* Keep centered on its reference */
+                left: 20px; /* Position dot on the new left line */
+                right: auto; /* Ensure no right positioning interferes */
+                transform: translateX(-50%); /* Keep centered on its new reference point */
             }
 
-            /* All arrows point from left content box to the line on mobile */
+            /* All arrows point from the content box to the line on mobile (always pointing right) */
             .timeline-item .timeline-content::before {
-                left: -15px;
+                left: -15px; /* Arrow comes from the left of the content box */
                 right: auto;
-                border-width: 10px 15px 10px 0;
-                border-color: transparent #fff transparent transparent;
-            }
-
-            /* Button container stacks vertically on mobile */
-            .button-container {
-                flex-direction: column;
-                gap: 10px;
-                padding: 0 10px; /* Add padding to buttons on mobile */
+                border-width: 10px 15px 10px 0; /* Create left-pointing triangle for all */
+                border-color: transparent #fff transparent transparent; /* Match content background */
             }
         }
     </style>
@@ -286,10 +237,7 @@
         <h1>The Stock Filtering Journey</h1>
         <p class="subtitle">A step-by-step guide to narrowing down the market to find potential investment opportunities.</p>
         
-        <div class="button-container">
-            <button id="add-step-button" class="action-button">Add Step</button>
-            <button id="remove-step-button" class="action-button">Remove Last Step</button>
-        </div>
+        <!-- The button container is removed as requested -->
 
         <div class="timeline" id="stock-timeline">
             <!-- Timeline items will be dynamically generated here by JavaScript -->
@@ -328,10 +276,10 @@
             {
                 title: "Step 7: Final Selection & Monitoring",
                 description: "From your refined shortlist, make your final investment choices. Continuously monitor your selected stocks for any fundamental changes in the business or industry."
-            }
+            }, // <-- FIX: Added missing comma here
             {
-                  title: "Step 7: Potential Breakouts",
-                  description: "Remember if you want to catch an early wave, price action is king, all the other parameters might be dull or still factoring in."
+                title: "Step 8: Potential Breakouts", // Changed to Step 8 to follow sequential numbering
+                description: "Remember if you want to catch an early wave, price action is king, all the other parameters might be dull or still factoring in."
             }
         ];
         // --- END OF EDITABLE SECTION ---
@@ -376,64 +324,11 @@
                 // Append the complete timeline item to the timeline container
                 timelineContainer.appendChild(timelineItem);
             });
-            // Update button states after rendering (e.g., disable 'Remove' if no steps)
-            updateButtonStates(); 
         }
 
-        /**
-         * Adds a new step to the stepsData array and regenerates the timeline.
-         * The new step gets a generic title and description.
-         */
-        function addStep() {
-            const newStepIndex = stepsData.length + 1;
-            stepsData.push({
-                title: `Step ${newStepIndex}: New Step`,
-                description: "This is a newly added step. You can edit its content."
-            });
-            generateTimeline(); // Re-render the timeline to show the new step
-        }
-
-        /**
-         * Removes the last step from the stepsData array and regenerates the timeline.
-         * Prevents removal if there are no steps left.
-         */
-        function removeLastStep() {
-            if (stepsData.length > 0) {
-                stepsData.pop(); // Remove the last element from the array
-                generateTimeline(); // Re-render the timeline to reflect the removal
-            }
-        }
-
-        /**
-         * Updates the disabled state of the 'Remove Last Step' button.
-         * It's disabled if there are no steps in the timeline.
-         */
-        function updateButtonStates() {
-            const removeButton = document.getElementById('remove-step-button');
-            if (removeButton) { /* Check if button exists before trying to access properties */
-                if (stepsData.length === 0) {
-                    removeButton.disabled = true;
-                } else {
-                    removeButton.disabled = false;
-                }
-            }
-        }
-
-        // Attach event listeners and generate timeline when the DOM is fully loaded
+        // Generate the timeline when the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             generateTimeline(); // Initial rendering of the timeline
-
-            // Get references to the buttons
-            const addStepButton = document.getElementById('add-step-button');
-            const removeStepButton = document.getElementById('remove-step-button');
-
-            // Attach click event listeners
-            if (addStepButton) {
-                addStepButton.addEventListener('click', addStep);
-            }
-            if (removeStepButton) {
-                removeStepButton.addEventListener('click', removeLastStep);
-            }
         });
     </script>
 
