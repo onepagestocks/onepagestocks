@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Filtering Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Define CSS variables for consistent theming */
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f4f7fa;
+            --text-color: #333;
+            --line-color: #dbe2ef;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Basic body styling for font, background, and spacing */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh; /* Ensure body takes full viewport height */
+        }
+
+        /* Container for content, centered and max-width */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Main heading styling */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        /* Subtitle styling */
+        p.subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 50px;
+        }
+
+        /* Button container for spacing and layout */
+        .button-container {
+            margin-top: 30px;
+            margin-bottom: 30px; /* Added margin to separate from timeline */
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Styling for action buttons */
+        .action-button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.2);
+        }
+
+        .action-button:hover {
+            background-color: #3a7bd5;
+            transform: translateY(-2px);
+        }
+
+        .action-button:active {
+            background-color: #2e6bb8;
+            transform: translateY(0);
+        }
+
+        .action-button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Timeline container with relative positioning for the central line */
+        .timeline {
+            position: relative;
+            width: 100%;
+            max-width: 800px; /* Limit timeline width for better readability */
+            margin: 0 auto;
+            padding: 0 15px; /* Padding for mobile view to prevent content touching edges */
+        }
+
+        /* The central vertical line of the timeline */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--line-color);
+            border-radius: 2px;
+            z-index: 0; /* Ensure line is behind content boxes */
+        }
+
+        /* Individual timeline item container */
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end; /* Default to right side for even items (flex-end) */
+            position: relative;
+            margin-bottom: 60px; /* Space between items */
+            width: 100%; /* Take full width of parent timeline container */
+        }
+
+        /* Styles for odd-indexed timeline items (left side) */
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-start; /* Move to left side */
+        }
+        
+        /* Content box styling */
+        .timeline-content {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px var(--shadow-color);
+            width: calc(50% - 60px); /* Half width minus margin/dot space */
+            text-align: left;
+            position: relative;
+            border-top: 4px solid var(--primary-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1; /* Ensure content box is above the line */
+        }
+        
+        /* Hover effect for content boxes */
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.2);
+        }
+
+        /* Specific margins for left/right content boxes */
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: 40px; /* Space from the central line */
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 40px; /* Space from the central line */
+        }
+        
+        /* Heading within content box */
+        .timeline-content h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Paragraph within content box */
+        .timeline-content p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* Styling for the timeline dot */
+        .timeline-dot {
+            position: absolute;
+            top: 20px; /* Align with content box top padding */
+            width: 20px;
+            height: 20px;
+            background-color: #fff;
+            border: 4px solid var(--primary-color);
+            border-radius: 50%;
+            z-index: 2; /* Ensure dot is on top of everything */
+            transform: translateX(-50%); /* Centering the dot on its reference point */
+        }
+
+        /* Positioning the dot for even (right) items */
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: 50%; /* Position at the center line */
+        }
+        
+        /* Positioning the dot for odd (left) items */
+        .timeline-item:nth-child(odd) .timeline-dot {
+            left: 50%; /* Position at the center line */
+        }
+
+        /* Styling for the arrow connecting content to the line */
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            z-index: 1; /* Arrow should be above content box background */
+        }
+        
+        /* Arrow for odd (left) items pointing towards the center line */
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -15px; /* Position outside the content box */
+            border-width: 10px 0 10px 15px; /* Create a right-pointing arrow */
+            border-color: transparent transparent transparent #fff; /* Match content background */
+        }
+        
+        /* Arrow for even (right) items pointing towards the center line */
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -15px; /* Position outside the content box */
+            border-width: 10px 15px 10px 0; /* Create a left-pointing arrow */
+            border-color: transparent #fff transparent transparent; /* Match content background */
+        }
+
+        /* Responsive Design for smaller screens */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px; /* Reduce overall padding on smaller screens */
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            p.subtitle {
+                font-size: 1rem;
+                margin-bottom: 30px;
+            }
+
+            /* Adjust central line position for mobile (left alignment) */
+            .timeline::before {
+                left: 20px;
+                transform: translateX(0); /* Remove center transform */
+            }
+
+            /* All timeline items align to the left on mobile */
+            .timeline-item {
+                justify-content: flex-start;
+                padding-left: 50px; /* Space for the line and dot */
+                margin-bottom: 40px; /* Reduce margin between items */
+            }
+
+            /* Content box takes full width within its padded container */
+            .timeline-content {
+                width: 100%;
+                margin-left: 0; /* Remove specific left/right margins */
+                margin-right: 0;
+            }
+
+            /* All dots align to the left line on mobile */
+            .timeline-dot {
+                left: 20px;
+                right: auto; /* Ensure no right positioning */
+                transform: translateX(-50%); /* Keep centered on its reference */
+            }
+
+            /* All arrows point from left content box to the line on mobile */
+            .timeline-item .timeline-content::before {
+                left: -15px;
+                right: auto;
+                border-width: 10px 15px 10px 0;
+                border-color: transparent #fff transparent transparent;
+            }
+
+            /* Button container stacks vertically on mobile */
+            .button-container {
+                flex-direction: column;
+                gap: 10px;
+                padding: 0 10px; /* Add padding to buttons on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>The Stock Filtering Journey</h1>
+        <p class="subtitle">A step-by-step guide to narrowing down the market to find potential investment opportunities.</p>
+        
+        <div class="button-container">
+            <button id="add-step-button" class="action-button">Add Step</button>
+            <button id="remove-step-button" class="action-button">Remove Last Step</button>
+        </div>
+
+        <div class="timeline" id="stock-timeline">
+            <!-- Timeline items will be dynamically generated here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // --- EDIT YOUR STEPS HERE ---
+        // This is a JSON array. You can add, remove, or reorder the objects inside.
+        // Each object represents a step on the timeline.
+        let stepsData = [
+            {
+                title: "Step 1: Do you like this Sector?",
+                description: "Start by applying broad filters to the entire market. Focus on non-negotiable criteria like market capitalization (e.g., > $1 Billion), sector (e.g., Technology, Healthcare), and country of operation."
+            },
+            {
+                title: "Step 2: Fundamental Health Check",
+                description: "Filter for financially sound companies. Look for consistent revenue growth, positive and growing earnings per share (EPS), and a healthy balance sheet (e.g., Debt-to-Equity Ratio < 1)."
+            },
+            {
+                title: "Step 3: Valuation Screening",
+                description: "Identify reasonably priced stocks. Use valuation metrics like Price-to-Earnings (P/E) ratio, Price-to-Sales (P/S) ratio, and Price-to-Book (P/B) ratio. Compare these to industry averages to avoid overpaying."
+            },
+            {
+                title: "Step 4: Profitability & Efficiency",
+                description: "Focus on how well the company generates profit. Screen for high and stable profitability margins like Gross Margin, Operating Margin, and Net Margin. Also, look at Return on Equity (ROE) > 15%."
+            },
+            {
+                title: "Step 5: Dividend Analysis",
+                description: "For income-focused investors, filter for a history of stable or growing dividend payments. Look for a sustainable dividend payout ratio (typically below 60%) to ensure payments can continue."
+            },
+            {
+                title: "Step 6: Qualitative Analysis",
+                description: "This is a crucial manual step. Research the remaining companies. Understand their business model, competitive advantages (moat), management team quality, and future growth prospects."
+            },
+            {
+                title: "Step 7: Final Selection & Monitoring",
+                description: "From your refined shortlist, make your final investment choices. Continuously monitor your selected stocks for any fundamental changes in the business or industry."
+            }
+            {
+                  title: "Step 7: Potential Breakouts",
+                  description: "Remember if you want to catch an early wave, price action is king, all the other parameters might be dull or still factoring in."
+            }
+        ];
+        // --- END OF EDITABLE SECTION ---
+
+
+        /**
+         * Dynamically generates the timeline items based on the stepsData array.
+         * Clears existing items and re-renders the entire timeline.
+         */
+        function generateTimeline() {
+            const timelineContainer = document.getElementById('stock-timeline');
+            // Clear existing timeline items before regenerating to avoid duplicates
+            timelineContainer.innerHTML = '';
+            
+            stepsData.forEach((step, index) => {
+                // Create the main timeline item container for each step
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item';
+
+                // Create the content box (the card with title and description)
+                const timelineContent = document.createElement('div');
+                timelineContent.className = 'timeline-content';
+
+                const title = document.createElement('h2');
+                title.textContent = step.title;
+
+                const description = document.createElement('p');
+                description.textContent = step.description;
+
+                // Append title and description to the content box
+                timelineContent.appendChild(title);
+                timelineContent.appendChild(description);
+
+                // Create the timeline dot, which marks the step on the central line
+                const timelineDot = document.createElement('div');
+                timelineDot.className = 'timeline-dot';
+
+                // Append the content box and the dot to the timeline item
+                timelineItem.appendChild(timelineContent);
+                timelineItem.appendChild(timelineDot);
+                
+                // Append the complete timeline item to the timeline container
+                timelineContainer.appendChild(timelineItem);
+            });
+            // Update button states after rendering (e.g., disable 'Remove' if no steps)
+            updateButtonStates(); 
+        }
+
+        /**
+         * Adds a new step to the stepsData array and regenerates the timeline.
+         * The new step gets a generic title and description.
+         */
+        function addStep() {
+            const newStepIndex = stepsData.length + 1;
+            stepsData.push({
+                title: `Step ${newStepIndex}: New Step`,
+                description: "This is a newly added step. You can edit its content."
+            });
+            generateTimeline(); // Re-render the timeline to show the new step
+        }
+
+        /**
+         * Removes the last step from the stepsData array and regenerates the timeline.
+         * Prevents removal if there are no steps left.
+         */
+        function removeLastStep() {
+            if (stepsData.length > 0) {
+                stepsData.pop(); // Remove the last element from the array
+                generateTimeline(); // Re-render the timeline to reflect the removal
+            }
+        }
+
+        /**
+         * Updates the disabled state of the 'Remove Last Step' button.
+         * It's disabled if there are no steps in the timeline.
+         */
+        function updateButtonStates() {
+            const removeButton = document.getElementById('remove-step-button');
+            if (removeButton) { /* Check if button exists before trying to access properties */
+                if (stepsData.length === 0) {
+                    removeButton.disabled = true;
+                } else {
+                    removeButton.disabled = false;
+                }
+            }
+        }
+
+        // Attach event listeners and generate timeline when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            generateTimeline(); // Initial rendering of the timeline
+
+            // Get references to the buttons
+            const addStepButton = document.getElementById('add-step-button');
+            const removeStepButton = document.getElementById('remove-step-button');
+
+            // Attach click event listeners
+            if (addStepButton) {
+                addStepButton.addEventListener('click', addStep);
+            }
+            if (removeStepButton) {
+                removeStepButton.addEventListener('click', removeLastStep);
+            }
+        });
+    </script>
+
+</body>
+</html>
