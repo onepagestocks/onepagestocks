@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Analysis Websites</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light background for the page */
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.3s ease-out;
+            position: relative;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 1.75rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #374151; /* gray-700 */
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .logo {
+            width: 48px; /* Tailwind's w-12 */
+            height: 48px; /* Tailwind's h-12 */
+            object-fit: contain;
+            margin-bottom: 1rem; /* Tailwind's mb-4 */
+            border-radius: 0.5rem; /* Tailwind's rounded-lg */
+            background-color: #f7fafc; /* light background for logos */
+            padding: 0.25rem;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header Section -->
+        <header class="text-center mb-8 bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-xl shadow-lg">
+            <h1 class="text-4xl font-bold mb-2">Stock Market Analysis Resources</h1>
+            <p class="text-lg opacity-90">An exhaustive list of helpful websites and their most useful features for stock and market analysis in India.</p>
+        </header>
+
+        <!-- Search and Add Website Section -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+            <input type="text" id="searchBar" placeholder="Search websites or features..." class="w-full md:w-2/3 p-3 border border-gray-300 rounded-xl focus:ring-blue-500 focus:border-blue-500 shadow-sm">
+            <button id="addWebsiteBtn" class="w-full md:w-1/3 bg-green-600 text-white py-3 px-6 rounded-xl hover:bg-green-700 transition duration-300 ease-in-out shadow-md font-semibold">Add New Website</button>
+        </div>
+
+        <!-- Websites Display Section -->
+        <div id="websiteList" class="space-y-10">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <!-- Add Website Modal -->
+    <div id="addWebsiteModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button" id="closeModal">&times;</span>
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Add New Website</h2>
+            <form id="addWebsiteForm" class="space-y-4">
+                <div>
+                    <label for="siteName" class="block text-gray-700 text-sm font-semibold mb-2">Website Name:</label>
+                    <input type="text" id="siteName" name="siteName" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                </div>
+                <div>
+                    <label for="siteUrl" class="block text-gray-700 text-sm font-semibold mb-2">Website URL:</label>
+                    <input type="url" id="siteUrl" name="siteUrl" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="https://example.com" required>
+                </div>
+                <div>
+                    <label for="siteFeature" class="block text-gray-700 text-sm font-semibold mb-2">Most Useful Feature:</label>
+                    <textarea id="siteFeature" name="siteFeature" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                </div>
+                <div>
+                    <label for="siteCategory" class="block text-gray-700 text-sm font-semibold mb-2">Category:</label>
+                    <select id="siteCategory" name="siteCategory" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" required>
+                        <!-- Options will be populated by JS -->
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-xl hover:bg-blue-700 transition duration-300 ease-in-out shadow-md font-semibold">Add Website</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Array of website data
+        let websiteData = [
+            {
+                "category": "Comprehensive Stock Research & Fundamental Analysis Platforms",
+                "websites": [
+                    { "name": "MarketSmith India", "url": "https://marketsmithindia.com/", "feature": "Techno-Fundamental CAN SLIM® Methodology" },
+                    { "name": "Equitymaster", "url": "https://www.equitymaster.com/", "feature": "100% Independent & Unbiased Research" },
+                    { "name": "MarketsMojo", "url": "https://marketsmojo.com/", "feature": "AI-driven Buy/Sell/Hold Recommendations & 7-dot Portfolio Analyzer" },
+                    { "name": "Simply Wall St", "url": "https://simplywall.st/", "feature": "Comprehensive Portfolio Analysis with visual 'Snowflake' Valuations" },
+                    { "name": "Tickertape", "url": "https://www.tickertape.in/", "feature": "User-friendly Stock Screener with over 200 filters & integrated data" },
+                    { "name": "Finology Ticker", "url": "https://ticker.finology.in/", "feature": "'Three-Way Assistance' (Analysis, Peer Comparison, Curated Bundles)" },
+                    { "name": "StockEdge", "url": "https://stockedge.com/", "feature": "'My Combo Scans' (Multi-criteria filtering)" }
+                ]
+            },
+            {
+                "category": "Advanced Technical Analysis & Charting Tools",
+                "websites": [
+                    { "name": "TradingView", "url": "https://in.tradingview.com/", "feature": "Comprehensive, Highly Customizable Charting Platform with Community Ideas" },
+                    { "name": "Investing.com", "url": "https://in.investing.com/", "feature": "'ProPicks AI' for AI-powered Stock Picks" },
+                    { "name": "Chartink", "url": "https://chartink.com/", "feature": "Real-time, Customizable Stock Screeners with Today's Top Trending Scans" },
+                    { "name": "AlgoTest", "url": "https://algotest.in/", "feature": "Comprehensive Backtesting, Forward Testing, and Algorithmic Trading Capabilities" }
+                ]
+            },
+            {
+                "category": "Powerful Stock & Mutual Fund Screeners",
+                "websites": [
+                    { "name": "Screener.in", "url": "https://www.screener.in/", "feature": "Powerful, Customizable Stock Screening with 10+ years of Data and Automatic Alerts" },
+                    { "name": "Rupeevest", "url": "https://rupeevest.com/", "feature": "Proprietary Mutual Fund Rating Algorithm for Future Outperformance" }
+                ]
+            },
+            {
+                "category": "Portfolio Management & Tracking Solutions",
+                "websites": [
+                    { "name": "INDmoney", "url": "https://www.indmoney.com/", "feature": "Consolidated, One-Stop Solution for Tracking All Investments (Indian & US stocks, MFs, NPS, savings)" },
+                    { "name": "Sharesight", "url": "https://sharesight.com/", "feature": "Automated Tracking of Stocks, ETFs, and Dividends Across Multiple Exchanges, Currencies, and Brokers" },
+                    { "name": "Portseido", "url": "https://www.portseido.com/", "feature": "Rich Analytics and Visualizations for Portfolio Performance, Trade Analytics, and Allocations" },
+                    { "name": "AllInvestView", "url": "https://allinvestview.com/", "feature": "Comprehensive Investment Dashboard with Fixed Income Tools and Efficient Frontier Analysis" }
+                ]
+            },
+            {
+                "category": "Mutual Funds & Debt Investment Platforms",
+                "websites": [
+                    { "name": "Moneycontrol", "url": "https://www.moneycontrol.com/", "feature": "Comprehensive Tracking of Mutual Fund Investments and Prices, Integrated with Broader Market Data and News" }
+                ]
+            },
+            {
+                "category": "Real-time Market News & Data Aggregators",
+                "websites": [
+                    { "name": "NDTV Profit", "url": "https://www.ndtvprofit.com/", "feature": "Real-time Market Updates, Indices, and News with Expert Opinions and Analysis" },
+                    { "name": "FT.com Markets", "url": "https://markets.ft.com/", "feature": "Global Market Data Coverage with Dedicated, Detailed Section for India, Including Equity Fund Country Flows" }
+                ]
+            },
+            {
+                "category": "Essential Educational Resources",
+                "websites": [
+                    { "name": "Varsity by Zerodha", "url": "https://zerodha.com/varsity/", "feature": "Free, Open, and Comprehensive Stock Market and Financial Education without Paywalls or Ads" },
+                    { "name": "Booming Bulls Academy", "url": "https://boomingbulls.com/", "feature": "Simplified, To-The-Point Stock Market Course for Beginners with Practical Strategies" },
+                    { "name": "Get Together Finance (GTF)", "url": "https://www.gettogetherfinance.com/", "feature": "Lifetime Mentorship Support for Aspiring Traders and Investors, Fostering Community" },
+                    { "name": "Groww Blog", "url": "https://www.groww.in/blog/", "feature": "Extensive Educational Content (Blogs & YouTube) Demystifying Complex Financial Concepts for First-Time Investors" },
+                    { "name": "NISM (National Institute of Securities Markets)", "url": "https://www.nism.ac.in/", "feature": "Mandatory Regulatory Certifications for Financial Professionals, Enhancing Industry Quality" }
+                ]
+            },
+            {
+                "category": "Official Exchange Data Sources",
+                "websites": [
+                    { "name": "NSE India", "url": "https://www.nseindia.com/", "feature": "Comprehensive and Innovative Product and Service Offerings Across All Market Segments" },
+                    { "name": "BSE India", "url": "https://www.bseindia.com/", "feature": "Python Library (`bsedata`) for Extracting Real-time Data, Enabling Programmatic Access" }
+                ]
+            }
+        ];
+
+        // Function to log messages
+        function log(message) {
+            console.log(`[${new Date().toLocaleTimeString()}] ${message}`);
+        }
+
+        // Function to get logo URL from website URL
+        function getLogoUrl(siteUrl) {
+            try {
+                const domain = new URL(siteUrl).hostname;
+                // Using Clearbit for dynamic logo fetching. It's a common, free-tier friendly service.
+                // You can specify size, e.g., ?size=128
+                return `https://logo.clearbit.com/${domain}?size=48`;
+            } catch (e) {
+                log(`Error parsing URL for logo: ${siteUrl}, Error: ${e}`);
+                return `https://placehold.co/48x48/CCCCCC/000000?text=${siteUrl.substring(siteUrl.indexOf('//') + 2, siteUrl.indexOf('/', siteUrl.indexOf('//') + 2)).substring(0, 2).toUpperCase()}`; // Fallback to placeholder with initials
+            }
+        }
+
+        // Function to render websites
+        function renderWebsites(dataToRender) {
+            log("Rendering websites...");
+            const websiteListDiv = document.getElementById('websiteList');
+            websiteListDiv.innerHTML = ''; // Clear existing content
+
+            if (dataToRender.length === 0) {
+                websiteListDiv.innerHTML = '<p class="text-center text-gray-600 text-xl font-medium mt-10">No websites found matching your criteria.</p>';
+                log("No websites found to render.");
+                return;
+            }
+
+            dataToRender.forEach(categoryGroup => {
+                // Category heading
+                const categoryHeading = document.createElement('h2');
+                categoryHeading.className = 'text-3xl font-bold text-gray-800 mb-6 border-b-2 border-blue-400 pb-2';
+                categoryHeading.textContent = categoryGroup.category;
+                websiteListDiv.appendChild(categoryHeading);
+
+                // Grid for websites within category
+                const gridDiv = document.createElement('div');
+                gridDiv.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8';
+
+                categoryGroup.websites.forEach(website => {
+                    const logoUrl = getLogoUrl(website.url);
+                    const card = document.createElement('div');
+                    card.className = 'card p-6 flex flex-col justify-between items-start'; // Added items-start for logo alignment
+                    card.innerHTML = `
+                        <img src="${logoUrl}" alt="${website.name} Logo" class="logo" onerror="this.onerror=null; this.src='https://placehold.co/48x48/CCCCCC/000000?text=${website.name.substring(0,2).toUpperCase()}';">
+                        <div>
+                            <h3 class="text-xl font-semibold text-blue-700 mb-2">${website.name}</h3>
+                            <p class="text-gray-600 mb-4 text-sm">${website.feature}</p>
+                        </div>
+                        <a href="${website.url}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline text-sm font-medium mt-4 self-start">Visit Website &rarr;</a>
+                    `;
+                    gridDiv.appendChild(card);
+                });
+                websiteListDiv.appendChild(gridDiv);
+            });
+            log("Websites rendered successfully.");
+        }
+
+        // Function to filter websites based on search input
+        function filterWebsites() {
+            log("Filtering websites...");
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            const filteredData = websiteData.map(categoryGroup => {
+                const filteredWebsites = categoryGroup.websites.filter(website =>
+                    website.name.toLowerCase().includes(searchTerm) ||
+                    website.feature.toLowerCase().includes(searchTerm)
+                );
+                return { ...categoryGroup, websites: filteredWebsites };
+            }).filter(categoryGroup => categoryGroup.websites.length > 0); // Only include categories with matching websites
+
+            renderWebsites(filteredData);
+            log(`Filtered by: "${searchTerm}"`);
+        }
+
+        // Add event listener for search bar
+        document.getElementById('searchBar').addEventListener('keyup', filterWebsites);
+
+        // Modal functionality
+        const addWebsiteModal = document.getElementById('addWebsiteModal');
+        const addWebsiteBtn = document.getElementById('addWebsiteBtn');
+        const closeModal = document.getElementById('closeModal');
+        const addWebsiteForm = document.getElementById('addWebsiteForm');
+        const siteCategorySelect = document.getElementById('siteCategory');
+
+        // Populate categories in the modal select box
+        function populateCategories() {
+            log("Populating categories in modal...");
+            siteCategorySelect.innerHTML = '<option value="">Select a Category</option>'; // Default option
+            const categories = [...new Set(websiteData.map(item => item.category))];
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                siteCategorySelect.appendChild(option);
+            });
+            log("Categories populated.");
+        }
+
+        addWebsiteBtn.onclick = function() {
+            addWebsiteModal.classList.remove('hidden');
+            addWebsiteModal.classList.add('flex'); // Ensure it uses flexbox for centering
+            populateCategories();
+            log("Add Website modal opened.");
+        }
+
+        closeModal.onclick = function() {
+            addWebsiteModal.classList.add('hidden');
+            addWebsiteModal.classList.remove('flex');
+            addWebsiteForm.reset(); // Clear form fields
+            log("Add Website modal closed.");
+        }
+
+        window.onclick = function(event) {
+            if (event.target == addWebsiteModal) {
+                addWebsiteModal.classList.add('hidden');
+                addWebsiteModal.classList.remove('flex');
+                addWebsiteForm.reset();
+                log("Add Website modal closed by clicking outside.");
+            }
+        }
+
+        // Handle form submission for adding new website
+        addWebsiteForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            log("Add Website form submitted.");
+
+            const name = document.getElementById('siteName').value.trim();
+            const url = document.getElementById('siteUrl').value.trim();
+            const feature = document.getElementById('siteFeature').value.trim();
+            const category = document.getElementById('siteCategory').value;
+
+            if (!name || !url || !feature || !category) {
+                log("Validation error: All fields are required.");
+                return;
+            }
+
+            const newWebsite = { name, url, feature };
+
+            // Find the category and add the new website
+            let categoryFound = false;
+            for (let i = 0; i < websiteData.length; i++) {
+                if (websiteData[i].category === category) {
+                    websiteData[i].websites.push(newWebsite);
+                    categoryFound = true;
+                    break;
+                }
+            }
+
+            // If category doesn't exist (shouldn't happen with select, but as a fallback)
+            if (!categoryFound) {
+                websiteData.push({
+                    category: category,
+                    websites: [newWebsite]
+                });
+            }
+
+            renderWebsites(websiteData); // Re-render the list with the new website
+            addWebsiteModal.classList.add('hidden');
+            addWebsiteModal.classList.remove('flex');
+            addWebsiteForm.reset();
+            log(`New website "${name}" added to category "${category}".`);
+        });
+
+        // Initial render on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            renderWebsites(websiteData);
+            log("Page loaded and initial websites rendered.");
+        });
+    </script>
+</body>
+</html>
