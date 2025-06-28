@@ -33,6 +33,23 @@
         .header-link:hover {
             color: #6366f1; /* Tailwind indigo-500 for hover */
         }
+        
+        /* Style for the 'view report' button in cards */
+        .report-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #6366f1; /* Tailwind indigo-500 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* Full rounded */
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        .report-button:hover {
+            background-color: #4f46e5; /* Tailwind indigo-600 */
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased">
@@ -75,7 +92,7 @@
     <main class="flex-grow container mx-auto px-6 py-12 md:py-16 grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Featured Projects Section (2/3 width on large screens) -->
         <section class="lg:col-span-2 section bg-gray-800 p-8 rounded-lg shadow-xl" id="featured-projects">
-            <h2 class="text-3xl font-bold text-indigo-400 mb-6">🗂️ Featured Projects</h2>
+            <h2 class="text-3xl font-bold text-indigo-400 mb-6">🗂️ Sectoral Report</h2>
             <div class="card bg-gray-700 p-6 rounded-lg shadow-md border border-gray-600 hover:shadow-lg" id="sectoral-report">
                 <h3 class="text-xl font-semibold text-white mb-2">Sectoral Movement Report: See how buying/selling has moved in all the sectors.</h3>
                 <p class="text-gray-300">Helps you identify emerging markets and make better decisions backed by data.</p>
